@@ -1,0 +1,18 @@
+
+public class Smth {
+    public static void main(String[] args) {
+        String a = "abcdefghigklmnopqrstuvwxyz";
+        String b = a.substring(15) + a.substring(0, 15);
+        System.out.println(b);
+        String c = "At noon be in the conference room with your hat on for a surprise party. YELL LOUD!";
+        for (int i = 0; i <  c.length(); i++)
+        {
+            char d = c.charAt(i);
+            char dlower = Character.toLowerCase(d);
+            int e = a.indexOf(dlower);
+            char found = b.charAt(e);
+            System.out.print(found);
+        }
+    }
+    
+}
