@@ -1,0 +1,66 @@
+/*
+1.9 HW01_01 Ints with Avg
+The user is going to input 0 or more positive integers followed by -1. Example:
+
+10
+4
+8
+-1
+Your job is to write a C program (not C++) that inputs these integers into an array, prints them out in reverse order (1 per line), followed by the average on the last line:
+
+8
+4
+10
+7.333333
+If the only input is -1, output "N/A" on a line by itself. Declare an integer array of size 100 to store the integers; you may assume the input will never exceed 100 values. Since we are inputting integers (and not strings), scanf works fine for input:
+
+int  x;
+scanf("%d", &x);  // input 1 integer:
+The average should be computed as a real number, and output using %f:
+
+printf("%f\n", average);*/
+
+/*main.c*/
+
+// ignore stdlib warnings if working in Visual Studio:
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(int argc, char *argv[])
+{
+  int values[100];
+  int i = 0;
+  int x;
+  int count = 0;
+  double average = 0.0;
+
+  scanf("%d", &x);
+  if (x != -1)
+  {
+      while (x != -1)
+      {
+          values[i] = x;
+          average += x;
+          count += 1;
+          i++;
+          scanf("%d", &x);
+      }
+  }
+    else if (x == -1)
+        {
+            printf("N/A\n");
+            exit(0);
+        }
+    for (i = count - 1; i >=0; i--)
+    {
+        printf("%d\n", values[i]);
+    }
+
+    average = average / count;
+    printf("%f\n", average);
+
+  return 0;
+}
