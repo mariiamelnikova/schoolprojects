@@ -1,0 +1,144 @@
+/*main.c*/
+
+// ignore stdlib warnings if working in Visual Studio:
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct Student
+{
+  char Netid[16];
+  int  Midterm;
+  int  Final;
+} Student;
+
+// inputs and discards the remainder of the current line for the
+// given input stream, including the EOL character(s):
+void skipRestOfInput(FILE *stream)
+{
+  char restOfLine[256];
+  int rolLength = sizeof(restOfLine) / sizeof(restOfLine[0]);
+
+  fgets(restOfLine, rolLength, stream);
+}
+
+int main(int argc, char *argv[])
+{
+    Student students[100];
+    char netid[16];
+    int i = 0;
+    int mid, fnl;
+    double midtermAverage = 0.0;
+    double finalAverage = 0.0;
+    double studentAverage;
+    int count = 0;
+    scanf("%s %d %d", netid, &mid, &fnl);
+    if(netid[0] == '#')
+            {
+                printf("Midterm: N/A\nFinal: N/A\n");
+                exit(0);
+            }
+    while (netid[0] != '#' && i <= 100)
+    {
+                count += 1;
+                midtermAverage += mid;
+                finalAverage += fnl;
+                skipRestOfInput(stdin);
+                strcpy(students[i].Netid, netid);
+                students[i].Midterm = mid;
+                students[i].Final = fnl;
+                scanf("%s %d %d", netid, &mid, &fnl);
+                i++;
+    }
+
+     for (i = count - 1; i >= 0; i--)
+    {
+        double tempsum = students[i].Midterm + students[i].Final;
+        studentAverage = tempsum / 2;
+        printf("%s: %d,%d,%f\n", students[i].Netid, students[i].Midterm, students[i].Final, studentAverage);
+    }
+
+    printf("Midterm: %f\nFinal: %f\n", midtermAverage/count, finalAverage/count);
+
+  return 0;
+}
+
+
+or when no numbers in final and midterm input
+
+/*main.c*/
+
+// ignore stdlib warnings if working in Visual Studio:
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct Student
+{
+  char Netid[16];
+  int  Midterm;
+  int  Final;
+} Student;
+
+// inputs and discards the remainder of the current line for the
+// given input stream, including the EOL character(s):
+void skipRestOfInput(FILE *stream)
+{
+  char restOfLine[256];
+  int rolLength = sizeof(restOfLine) / sizeof(restOfLine[0]);
+
+  fgets(restOfLine, rolLength, stream);
+}
+
+int main(int argc, char *argv[])
+{
+    Student students[100];
+    char netid[16];
+    int i = 0;
+    int mid = 0;
+    int fnl = 0;
+    double midtermAverage = 0.0;
+    double finalAverage = 0.0;
+    double studentAverage;
+    int count = 0;
+    scanf("%s", netid);
+    if(netid[0] == '#')
+            {
+                //scanf("%d %d", &mid, &fnl);
+                printf("Midterm: N/A\nFinal: N/A");
+                exit(0);
+            }
+    scanf("%d %d", &mid, &fnl);
+    while (netid[0] != '#' && i <= 100)
+    {
+                midtermAverage += mid;
+                finalAverage += fnl;
+                strcpy(students[i].Netid, netid);
+                students[i].Midterm = mid;
+                students[i].Final = fnl;
+                scanf("%s", netid);
+                count ++;
+                if(netid[0] == '#')
+                    {
+                        break;
+                    }
+                scanf("%d %d", &mid, &fnl);
+                skipRestOfInput(stdin);
+                i++;
+    }
+
+     for (i = count - 1; i >= 0; i--)
+    {
+        double tempsum = students[i].Midterm + students[i].Final;
+        studentAverage = tempsum / 2;
+        printf("%s: %d, %d, %f\n", students[i].Netid, students[i].Midterm, students[i].Final, studentAverage);
+    }
+
+    printf("Midterm: %f\nFinal:%f\n", midtermAverage/count, finalAverage/count);
+
+  return 0;
+}
